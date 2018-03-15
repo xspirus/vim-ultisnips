@@ -1,0 +1,134 @@
+###########################################################################
+#                            TextMate Snippets                            #
+###########################################################################
+
+priority -50
+
+global !p
+from vimsnippets import *
+author = "Spiros Dontas"
+email = "spirosdontas@gmail.com"
+endglobal
+
+snippet _skel "Skeleton Template" b
+`!p
+snip.rv = startLine(80)
+snip += emptyLine(80)
+snip += stringLine(["Filename", fn], 80)
+mids = midLine("Project", len(t[1]), 80)
+snip += mids[0]
+`${1:${VISUAL:Project Name}}`!p
+mids = midLine("Project", len(t[1]), 80)
+snip.rv = mids[1]
+mids = midLine("Version", len(t[2]), 80)
+snip += mids[0]
+`${2:${VISUAL:1.0}}`!p
+mids = midLine("Version", len(t[2]), 80)
+snip.rv = mids[1]
+snip += stringLine(["Author", author], 80)
+snip += stringLine(["Email", email], 80)
+snip += emptyLine(80)
+mids = midLine("Description", len(t[3]), 80)
+snip += mids[0]
+`${3:${VISUAL:...}}`!p
+mids = midLine("Description", len(t[3]), 80)
+snip.rv = mids[1]
+snip += emptyLine(80)
+snip += endLine(80)`
+
+$0
+endsnippet
+
+snippet def "#define ..."
+#define $1
+endsnippet
+
+snippet #ifndef "#ifndef ... #define ... #endif"
+#ifndef ${1/([A-Za-z0-9_]+).*/$1/}
+#define ${1:SYMBOL} ${2:value}
+#endif /* ifndef $1 */
+endsnippet
+
+snippet #if "#if #endif" b
+#if ${1:0}
+${VISUAL}$0
+#endif
+endsnippet
+
+snippet mark "#pragma mark (mark)"
+#if 0
+${1:#pragma mark -
+}#pragma mark $2
+#endif
+
+$0
+endsnippet
+
+snippet main "main() (main)"
+int main(int argc, char *argv[])
+{
+	${VISUAL}$0
+	return 0;
+}
+endsnippet
+
+snippet for "for loop (for)"
+for (${2:i} = 0; $2 < ${1:count}; ${3:++$2}) {
+	${VISUAL}$0
+}
+endsnippet
+
+snippet fori "for int loop (fori)"
+for (${4:int} ${2:i} = 0; $2 < ${1:count}; ${3:++$2}) {
+	${VISUAL}$0
+}
+endsnippet
+
+snippet once "Include header once only guard"
+#ifndef ${1:`!p
+if not snip.c:
+	import random, string
+	name = re.sub(r'[^A-Za-z0-9]+','_', snip.fn).upper()
+	rand = ''.join(random.sample(string.ascii_letters+string.digits, 8))
+	snip.rv = ('%s_%s' % (name,rand)).upper()
+else:
+	snip.rv = snip.c`}
+#define $1
+
+${VISUAL}$0
+
+#endif /* end of include guard: $1 */
+endsnippet
+
+snippet fprintf "fprintf ..."
+fprintf(${1:stderr}, "${2:%s}\n"${2/([^%]|%%)*(%.)?.*/(?2:, :\);)/}$3${2/([^%]|%%)*(%.)?.*/(?2:\);)/}
+endsnippet
+
+snippet eli "else if .. (eli)"
+else if (${1:/* condition */}) {
+	${VISUAL}$0
+}
+endsnippet
+
+snippet printf "printf .. (printf)"
+printf("${1:%s}\n"${1/([^%]|%%)*(%.)?.*/(?2:, :\);)/}$2${1/([^%]|%%)*(%.)?.*/(?2:\);)/}
+endsnippet
+
+snippet st "struct"
+struct ${1:`!p snip.rv = (snip.basename or "name") + "_t"`} {
+	${0:/* data */}
+};
+endsnippet
+
+snippet fun "function" b
+${1:void} ${2:function_name}($3)
+{
+	${VISUAL}$0
+}
+endsnippet
+
+snippet fund "function declaration" b
+${1:void} ${2:function_name}($3);
+endsnippet
+
+# vim:ft=snippets:
