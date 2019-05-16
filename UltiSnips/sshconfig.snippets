@@ -1,0 +1,9 @@
+snippet splitline "A split line for ssh config" b
+`!p
+x = (76 - len(t[1])) // 2
+snip.rv = '#' + '-' * x + ' '
+`${1:${VISUAL:Description}}`!p
+x = (76 - len(t[1])) // 2 + (76 - len(t[1])) % 2
+snip.rv = ' ' + '-' * x + '#'`
+$0
+endsnippet

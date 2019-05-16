@@ -39,6 +39,19 @@ snip += endLine(80)`
 $0
 endsnippet
 
+snippet lcom "Line comment"
+`!p
+width = 76
+length = len(t[1])
+snip.rv = "/" + "*" * ((width - length) // 2) + " "
+`${1:${VISUAL:Description}}`!p
+width = 76
+length = len(t[1])
+snip.rv = " " + "*" * ((width - length) // 2 + (width - length) % 2) + "/"
+`
+$0
+endsnippet
+
 snippet def "#define ..."
 #define $1
 endsnippet

@@ -150,3 +150,16 @@ def endLine(width):
     eline = i
     eline += m[0] * (width - len(eline) - 1) + e
     return eline
+
+def midComment() :
+    b, m, e, i = ( s.strip() for s in get_comment_format() )
+    i = ' ' * (len(b) - 1)
+    return (i + m[0])
+
+def midContentLine(twidth, width):
+    b, m, e, i = (s.strip() for s in get_comment_format())
+    i = ' ' * (len(b) - 1)
+    sline = i
+    sline += m[0] * int( ( width - len(sline) - twidth ) / 2 - 1 ) + ' '
+    eline = ' ' + m[0] * ( width - len(sline) - twidth - 1 )
+    return sline, eline

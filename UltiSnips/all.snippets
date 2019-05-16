@@ -55,6 +55,33 @@ snip += endLine(width)
 `
 endsnippet
 
+snippet fbox "Full Box" b
+`!p
+width = 80
+snip.rv = startLine(width)
+mids = midContentLine(len(t[1]), width)
+snip += mids[0]
+`${1:${VISUAL:Place Content Here}}`!p
+width = 80
+mids = midContentLine(len(t[1]), width)
+snip.rv = mids[1]
+snip += endLine(width)
+`
+endsnippet
+
+snippet ncom "Nice Comments" b
+`!p
+width = 80
+snip.rv = startLine(width)
+mids = midComment()
+snip += mids
+`${1:${VISUAL:Description}}
+`!p
+width = 80
+snip.rv = endLine(width)
+`
+endsnippet
+
 snippet fold "Insert a vim fold marker" b
 `!p snip.rv = get_comment_format()[0]` ${1:Fold description} `!p snip.rv = foldmarker()[0]`${2:1} `!p snip.rv = get_comment_format()[2]`
 endsnippet

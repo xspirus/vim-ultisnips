@@ -1,0 +1,21 @@
+priority -50
+
+###########################################################################
+#                            TEXTMATE SNIPPETS                            #
+###########################################################################
+
+global !p
+from vimsnippets import *
+from shutil import get_terminal_size
+author = "Spiros Dontas"
+email = "spirosdontas@gmail.com"
+endglobal
+
+snippet sec "description comment"
+`!p
+snip.rv = "# " + "-" * ((74 - len(t[1])) // 2) + " "
+`${1:${VISUAL:Section}}`!p
+snip.rv = " " + "-" * ((74 - len(t[1])) // 2 + ((76 - len(t[1])) % 2)) + " #"
+`
+$0
+endsnippet

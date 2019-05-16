@@ -6,9 +6,23 @@ priority -50
 
 global !p
 from vimsnippets import *
+from shutil import get_terminal_size
 author = "Spiros Dontas"
 email = "spirosdontas@gmail.com"
 endglobal
+
+snippet sec "description comment"
+`!p
+snip.rv = "# " + "-" * ((74 - len(t[1])) // 2) + " "
+`${1:${VISUAL:Section}}`!p
+snip.rv = " " + "-" * ((74 - len(t[1])) // 2 + ((76 - len(t[1])) % 2)) + " #"
+`
+$0
+endsnippet
+
+snippet printline "print a line"
+print(u"\u2500" * columns)
+endsnippet
 
 snippet _skel "Skeleton Template" b
 #!/usr/bin/env python3

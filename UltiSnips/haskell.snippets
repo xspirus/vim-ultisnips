@@ -1,5 +1,13 @@
 priority -50
 
+snippet hcom "haskell comment"
+`!p
+snip.rv = '-' * 80
+`
+-- ${1:${VISUAL:Content}}
+$0
+endsnippet
+
 snippet impq "Qualified import"
 import qualified ${1:Data.Text} as ${0:`!p snip.rv = t[1].split(".")[-1]`}
 endsnippet
